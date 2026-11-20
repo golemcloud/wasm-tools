@@ -134,6 +134,7 @@ impl<'a> DlOpenables<'a> {
                     .collect::<Vec<_>>();
 
                 symbols.sort_by_key(|(name, ..)| *name);
+                let symbols_len = symbols.len();
 
                 // struct Symbol symbols[];
                 let symbols_address = data.start_struct();
@@ -152,12 +153,7 @@ impl<'a> DlOpenables<'a> {
                     }
                 }
 
-                (
-                    metadata.name,
-                    name_address,
-                    metadata.exports.len(),
-                    symbols_address,
-                )
+                (metadata.name, name_address, symbols_len, symbols_address)
             })
             .collect::<Vec<_>>();
 
