@@ -334,3 +334,14 @@ tpe = "tpe"
 
 # greater or equal signed
 ges = "ges"
+
+# Inside this workspace, the crates.io versions that wit-component names are
+# the workspace crates. Cargo ignores this section when the repository is a
+# Git dependency, so dependents get the crates.io crates.
+[patch.crates-io]
+wasm-encoder = { path = "crates/wasm-encoder" }
+wasm-metadata = { path = "crates/wasm-metadata" }
+wasmparser = { path = "crates/wasmparser" }
+wast = { path = "crates/wast" }
+wat = { path = "crates/wat" }
+wit-parser = { path = "crates/wit-parser" }
