@@ -27,12 +27,15 @@ log = "0.4.17"
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-wasm-encoder = { workspace = true, features = ['std', 'wasmparser'] }
-wasm-metadata = { workspace = true }
-wasmparser = { workspace = true, features = ['std', 'component-model', 'simd'] }
-wast = { workspace = true, optional = true }
-wat = { workspace = true, optional = true }
-wit-parser = { workspace = true, features = ['decoding', 'serde'] }
+# The sibling crates come from crates.io, as in the published 0.258.3 manifest.
+# A Git dependency on this crate then shares them with registry dependents
+# instead of building a second copy of each from this repository.
+wasm-encoder = { version = "0.258.3", default-features = false, features = ['std', 'wasmparser'] }
+wasm-metadata = { version = "0.258.3", default-features = false }
+wasmparser = { version = "0.258.3", default-features = false, features = ['std', 'component-model', 'simd'] }
+wast = { version = "258.0.3", default-features = false, optional = true }
+wat = { version = "1.258.3", default-features = false, optional = true }
+wit-parser = { version = "0.258.3", features = ['decoding', 'serde'] }
 
 [dev-dependencies]
 env_logger = { workspace = true }
@@ -40,10 +43,10 @@ glob = "0.3.0"
 libtest-mimic = { workspace = true }
 pretty_assertions = "1.3.0"
 toml = { workspace = true }
-wasmparser = { workspace = true, features = ['std', 'component-model', 'features'] }
+wasmparser = { version = "0.258.3", default-features = false, features = ['simd', 'std', 'component-model', 'features'] }
 wasmprinter = { workspace = true, features = ['component-model'] }
-wat = { workspace = true, features = ['component-model'] }
-wasm-metadata = { workspace = true, features = ['oci'] }
+wat = { version = "1.258.3", default-features = false, features = ['component-model'] }
+wasm-metadata = { version = "0.258.3", default-features = false, features = ['oci'] }
 
 [target.'cfg(not(target_family = "wasm"))'.dev-dependencies]
 wasmtime = { workspace = true }
