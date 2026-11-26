@@ -126,6 +126,7 @@ impl<'a> DlOpenables<'a> {
                     .collect::<Vec<_>>();
 
                 symbols.sort_by_key(|(name, ..)| *name);
+                let symbols_len = symbols.len();
 
                 let start = buffer.len();
                 for (name, name_address, address) in symbols {
@@ -148,7 +149,7 @@ impl<'a> DlOpenables<'a> {
                 (
                     metadata.name,
                     name_address,
-                    metadata.exports.len(),
+                    symbols_len,
                     memory_base + u32::try_from(start).unwrap(),
                 )
             })
